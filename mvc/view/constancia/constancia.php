@@ -7,7 +7,7 @@ require("../../controller/constancia/constancia_controller.php");
        $estudiante= $_GET['estudiante'];
      
        $controller= new constancia_controller() ;
-$Datos=$controller->getDatosConstancia($estudiante)[0];
+       $Datos=$controller->getDatosConstancia($estudiante)[0];
 
 
 
