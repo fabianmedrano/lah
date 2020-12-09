@@ -1,0 +1,28 @@
+Metodos para conectarse a base de datos.
+
+1- findAll($query): array()
+
+// Este metodo resive un string con el query a ejecutar.
+// $query = "call sp_xxxx();"
+
+2- find($query, $params): array()
+
+// Este metodo resive un string con el query a ejecutar y un objeto tipo dato.
+// $query = "call sp_xxxx(?, ?, ...);"
+// $params = (object) BindParam; ***
+
+3- delete_update_insert($query, $params): {status, msm}
+
+// Este metodo resive un string con el query a ejecutar y un objeto tipo dato.
+// $query = "call sp_xxxx(?, ?, ...);"
+// $params = (object) BindParam; ***
+
+***
+Nota: BindParam es un objeto creado para porder ir agragando (N) parametros a las consultas a base de dato.
+
+Metodos:
+
+1- add( $type, $value ): void
+2- get(): array()
+
+["ii", 1, 2]

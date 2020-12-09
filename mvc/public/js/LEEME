@@ -1,0 +1,21 @@
+Fromato de creacion de archivos.
+
+// Por cada modulo se creara una carperta.
+// Dentro de cada carpeta los archivos tendran el nombre del modulo seguido de la acción.
+// Ejemplo xxxx_create, xxxx_update, xxxx_view.
+// Los archivos sin estos sufijos se entienden que es del lado del cliente y los demas son admin
+
+Ejemplo de estructura
+
+public/js
+|--- Nosotros
+     |--- nosotros.js
+     |--- nosotros_create.js
+     |--- nosotros_view.js
+|--- Noticias
+     |--- noticias.js
+     |--- noticia.js
+     |--- noticia_create.js
+|--- Galeria
+     |--- galeria.js
+     |--- galeria_view.js
