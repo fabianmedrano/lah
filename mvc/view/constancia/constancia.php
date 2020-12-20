@@ -9,9 +9,9 @@ require("../../controller/constancia/constancia_controller.php");
        $controller= new constancia_controller() ;
        $Datos=$controller->getDatosConstancia($estudiante)[0];
 
-
-
-
+       
+       $director=$controller->getDatosDirector()[0];
+//var_dump($director);
 
 
 switch ($Datos['id_seccion']) {
@@ -81,7 +81,7 @@ $pdf->MultiCell('', 5,  iconv('utf-8', 'windows-1252', "Dado al " . date("d") . 
 $pdf->Ln(18);
 
 $pdf->MultiCell('', 5, "_______________________________________", 0, "C");
-$pdf->MultiCell('', 5, iconv('utf-8', 'windows-1252',  "MSc. Marlon Juárez Gutiérrez\nDirector"), 0, "C");
+$pdf->MultiCell('', 5, iconv('utf-8', 'windows-1252',  "MSc. ". $director['nombre']."\nDirector"), 0, "C");
 $pdf->Ln(30);
 
 $pdf->SetTextColor(165, 165, 165);

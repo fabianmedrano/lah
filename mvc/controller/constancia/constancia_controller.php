@@ -17,12 +17,17 @@ class constancia_controller
        return (query_database::find($query,$binParam) );
 	}
 
+
+    public function getDatosDirector()
+    {
+       $query = "call db_liceo_web.sp_obtenerDirector();";       
+       return (query_database::findAll($query) );
+	}
+
     public function solicitarConstancia($cedula)
     {
 
-/*IMPORTANTE : VALIDAR EXISTENCIA DE CEDULA EN BASE 
-VALIDAR DESDE LA VASE QUE NO SE PERMITA DUPICAR LA SOLICITD
-*/
+
 
 $result = null;
        $query = "call db_liceo_web.sp_solicitarConstancia(?);";

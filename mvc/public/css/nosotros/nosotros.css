@@ -1,0 +1,14 @@
+.nosotros-cuerpo{
+    width:100%;
+    margin:  0px auto 30px;
+}
+
+.carousel-inner{
+    width:100%;
+    max-height: 500px !important;
+    
+}
+img {
+    max-width: 100% !important;
+    height: auto !important;
+  }

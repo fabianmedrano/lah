@@ -137,9 +137,14 @@ function goEditpersonal(id) {
 } 
 
 
+/***+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ***/
+
+
+
 function iniciarTablaRoles() {
     $('#tb_roles').dataTable({
         data: getRoles(),
+        responsive: true,
         language: { "url": "../../configDatatabble.json" },
         select: false,
         destroy: true,
@@ -170,3 +175,49 @@ function iniciarTablaRoles() {
     $('#exampleModal').modal('show') 
 
  }
+
+
+
+
+ 
+function guardarPersonal() {
+    if ($form.valid()) {
+        Swal.fire({
+            title: '¿Esta seguro?',
+            text: "Se guardara este personal!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Guardar!'
+        }).then((result) => {
+            if (result.value) {
+
+                $data = $('#form_create_personal').serializeArray();
+                $data.push({ name: 'in_contactos', value: contactosToJson() });
+                $data.push({ name: 'accion', value: 'insert_rol' });
+                console.log($data);
+                $.ajax({
+                    url: '../../controller/personal/personal_switch.php',
+                    type: 'POST',
+                    data: $.param($data),
+                    success: function (res) {
+                        console.log(res);
+                        var result = limpiarJson(res);
+                        alertas(JSON.parse(result)); // error con este parse
+                    },
+                    error: function (res) {
+                        console.log(res);
+                        var result = limpiarJson(res);
+                        alertas(JSON.parse(result));
+                    }
+                    
+                });
+   
+            }
+        });
+    } else {
+        console.log('no valido');
+    }
+
+}
