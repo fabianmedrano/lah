@@ -1,7 +1,5 @@
 <?php
-include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
-
-require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
+require_once  "../../controller/nosotros/nosotros_controller.php";
 
 ?>
 
@@ -10,29 +8,29 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 
 
 <head>
-  <?php include(TEMPLATES_PATH . "/metadata.php") ?>
+  <?php require_once "../base/metadata.php" ?>
 
-  <link href="<?php echo PUBLIC_PATH ?>/css/general.css" rel="stylesheet">
+  <link href="../../css/public/general.css" rel="stylesheet">
 
-  <link href="<?php echo LIB_PATH ?>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="<?php echo LIB_PATH ?>/fontawesome/css/all.min.css" rel="stylesheet">
-
-
-  <script src="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.js"></script>
-  <link rel="stylesheet" href="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.css">
+  <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../lib/fontawesome/css/all.min.css" rel="stylesheet">
 
 
-  <link rel="stylesheet" type="text/css" href="<?php echo LIB_PATH ?>/DataTables/datatables.css">
+  <script src="../../lib/sweetalert2/dist/sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="../../lib/sweetalert2/dist/sweetalert2.min.css">
 
-  <link rel="stylesheet" type="text/css" href="<?php echo LIB_PATH ?>/DataTables/DataTables-1.10.21/css/dataTables.bootstrap4.css">
-  <script type="text/javascript" charset="utf8" src="<?php echo LIB_PATH ?>/DataTables/datatables.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="../../lib/DataTables/datatables.css">
+
+  <link rel="stylesheet" type="text/css" href="../../lib/DataTables/DataTables-1.10.21/css/dataTables.bootstrap4.css">
+  <script type="text/javascript" charset="utf8" src="../../lib/DataTables/datatables.js"></script>
 
   <script src="../../lib/bootstrap/bootstrap-tagsinput/dist/bootstrap-tagsinput.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 
 
-  <script src="<?php echo PUBLIC_PATH ?>/js/validacion.js"></script>
-  <script src="<?php echo PUBLIC_PATH ?>/js/nosotros/contacto_edit.js"></script>
+  <script src="../../public/js/validacion.js"></script>
+  <script src="../../public/js/nosotros/contacto_edit.js"></script>
 
 
 
@@ -42,7 +40,7 @@ require_once CONTROLLER_PATH . "/nosotros/nosotros_controller.php";
 </head>
 
 <body>
-  <?php include(TEMPLATES_PATH . "/nav.php") ?>
+  <?php require_once "../base/navbarAdmin.php" ?>
 
 
 

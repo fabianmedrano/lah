@@ -180,7 +180,7 @@ function iniciarTablaRoles() {
 
 
  
-function guardarPersonal() {
+function guardarRolPersonal() {
     if ($form.valid()) {
         Swal.fire({
             title: '¿Esta seguro?',

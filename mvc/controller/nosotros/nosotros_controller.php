@@ -25,8 +25,8 @@ class nosotros_controller
     {
 
         $query = "call db_liceo_web.sp_obtenerNosotros();";
-        $grados = query_database::findAll($query);
-        echo json_encode($grados);
+        $nosotros = query_database::findAll($query);
+      return(($nosotros[0])['texto']);
 
     }
 

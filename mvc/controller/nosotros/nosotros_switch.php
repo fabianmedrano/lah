@@ -3,7 +3,7 @@ require_once "nosotros_controller.php";
 
 if( isset($_REQUEST['accion'] )){
 
-    $controller = new nosotros_controller();
+    $controlador_nosotros = new nosotros_controller();
 
     switch ($_REQUEST['accion']){
         case 'update':

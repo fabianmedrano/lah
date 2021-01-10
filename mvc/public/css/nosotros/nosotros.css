@@ -1,7 +1,9 @@
 .nosotros-cuerpo{
     width:100%;
-    margin:  0px auto 30px;
+    margin: 20px 20px 20px;
+    
 }
+
 
 .carousel-inner{
     width:100%;
@@ -11,4 +13,10 @@
 img {
     max-width: 100% !important;
     height: auto !important;
+  }
+  .contendor-cuerpo{
+     max-width: 100% !important;
+    position:absolute !important;
+    top:70%;
+    margin-top:-7px; 
   }

@@ -37,7 +37,7 @@ require_once "../../controller/nosotros/nosotros_controller.php";
 
 
 
-<!-- <script src="../../public/js/validacion.js"></script> -->
+< <script src="../../public/js/validacion.js"></script>
 
   <script src="../../public/js/nosotros/nosotros_edit.js"></script>
 
