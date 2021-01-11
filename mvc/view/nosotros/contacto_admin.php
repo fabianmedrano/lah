@@ -16,10 +16,6 @@ require_once  "../../controller/nosotros/nosotros_controller.php";
   <link href="../../lib/fontawesome/css/all.min.css" rel="stylesheet">
 
 
-  <script src="../../lib/sweetalert2/dist/sweetalert2.min.js"></script>
-  <link rel="stylesheet" href="../../lib/sweetalert2/dist/sweetalert2.min.css">
-
-
   <link rel="stylesheet" type="text/css" href="../../lib/DataTables/datatables.css">
 
   <link rel="stylesheet" type="text/css" href="../../lib/DataTables/DataTables-1.10.21/css/dataTables.bootstrap4.css">
@@ -30,8 +26,8 @@ require_once  "../../controller/nosotros/nosotros_controller.php";
 
 
   <script src="../../public/js/validacion.js"></script>
-  <script src="../../public/js/nosotros/contacto_edit.js"></script>
 
+  <script src="../../public/js/nosotros/contacto_edit.js"></script>
 
 
 
@@ -84,11 +80,11 @@ require_once  "../../controller/nosotros/nosotros_controller.php";
           <label for="direccion">Dirección:</label>
           <textarea class="form-control" rows="5" id="direccion" name="direccion">
           <?php
-          $file = fopen(DATA_PATH . "/direccion.txt", "r");
+          $file = fopen(  "../../controller/nosotros/adress.txt", "r");
           while (!feof($file)) {
-
-            echo trim( fgets($file));
+             $direccion =(fgets($file));
           }
+          echo trim($direccion,"\t");
           fclose($file);
           ?></textarea>
         </div>

@@ -1,53 +1,53 @@
 var listaCate = [];
 
 $(document).ready(function () {
-    $tel =getTelefonos();
- $red=getRedes();
- $email=getCorreos();
+    $tel = getTelefonos();
+    $red = getRedes();
+    $email = getCorreos();
     iniciarTablaTelefonos($tel);
-    iniciarTablaRedes( $red);
+    iniciarTablaRedes($red);
     iniciarTablaCorreos($email);
 
     $(".Telefono").mask("9999-9999");
 
     $("#select_tipo_contacto").change(function () {
         limpiarError();
-        if($("#select_tipo_contacto")[0].selectedIndex == 0) {
-             $("#input_contacto").prop("disabled", true);
-              $('#btn_accion').prop("disabled", true); 
-    }else{
-         $("#input_contacto").prop("disabled", false);
-        
-         $('#btn_accion').prop("disabled", false); 
+        if ($("#select_tipo_contacto")[0].selectedIndex == 0) {
+            $("#input_contacto").prop("disabled", true);
+            $('#btn_accion').prop("disabled", true);
+        } else {
+            $("#input_contacto").prop("disabled", false);
+
+            $('#btn_accion').prop("disabled", false);
         }
         setinputRegistro($("#select_tipo_contacto option:selected").text());
     });
 
-    var $ruleUrl = [{ error: "required_content", msg: "Debe ingresar una url"  },
-    { error: "valid", msg: "URL no valida." }, ];
+    var $ruleUrl = [{ error: "required_content", msg: "Debe ingresar una url" },
+    { error: "valid", msg: "URL no valida." },];
 
-    var $ruleemail = [{ error: "required_content", msg: "Debe ingresar un correo"  },
-    { error: "valid", msg: "Correo no valido" }, ];
+    var $ruleemail = [{ error: "required_content", msg: "Debe ingresar un correo" },
+    { error: "valid", msg: "Correo no valido" },];
 
-    var $ruletel = [{ error: "required_content", msg: "Debe ingresar un teléfono"  } ];
+    var $ruletel = [{ error: "required_content", msg: "Debe ingresar un teléfono" }];
 
 
-    $("#input_contacto_edit").bind(" change click keyup input paste", function(event){
-    
-        $contacto =  $("#input_contacto_edit").val().trim();
-        ($("#input_contacto_edit").hasClass("Red"))? console.log (validarURL($contacto,$ruleUrl,$('#error_contacto_edit'))) : '';
-        ($("#input_contacto_edit").hasClass("Telefono"))?console.log (validarTelefono($contacto,$ruletel,$('#error_contacto_edit'))) : '';
-        ($("#input_contacto_edit").hasClass("Correo"))?console.log (validarEmail($contacto,$ruleemail,$('#error_contacto_edit'))) : '';
-       
+    $("#input_contacto_edit").bind(" change click keyup input paste", function (event) {
+
+        $contacto = $("#input_contacto_edit").val().trim();
+        ($("#input_contacto_edit").hasClass("Red")) ? console.log(validarURL($contacto, $ruleUrl, $('#error_contacto_edit'))) : '';
+        ($("#input_contacto_edit").hasClass("Telefono")) ? console.log(validarTelefono($contacto, $ruletel, $('#error_contacto_edit'))) : '';
+        ($("#input_contacto_edit").hasClass("Correo")) ? console.log(validarEmail($contacto, $ruleemail, $('#error_contacto_edit'))) : '';
+
     });
 
-    $("#input_contacto").bind(" change click keyup input paste", function(event){
-    
-        $contacto =  $("#input_contacto").val().trim();
-        ($("#input_contacto").hasClass("Red"))? console.log (validarURL($contacto,$ruleUrl,$('#error_contacto'))) : '';
-        ($("#input_contacto").hasClass("Telefono"))?console.log (validarTelefono($contacto,$ruletel,$('#error_contacto'))) : '';
-        ($("#input_contacto").hasClass("Correo"))?console.log (validarEmail($contacto,$ruleemail,$('#error_contacto'))) : '';
-       
+    $("#input_contacto").bind(" change click keyup input paste", function (event) {
+
+        $contacto = $("#input_contacto").val().trim();
+        ($("#input_contacto").hasClass("Red")) ? console.log(validarURL($contacto, $ruleUrl, $('#error_contacto'))) : '';
+        ($("#input_contacto").hasClass("Telefono")) ? console.log(validarTelefono($contacto, $ruletel, $('#error_contacto'))) : '';
+        ($("#input_contacto").hasClass("Correo")) ? console.log(validarEmail($contacto, $ruleemail, $('#error_contacto'))) : '';
+
     });
 
 
@@ -74,7 +74,7 @@ $(document).ready(function () {
                 var $accion = "&btn_accion=guardar_contacto";
                 $.ajax({
                     method: 'POST',
-                    url: '../../Controller/nosotros/switch_controller.php',
+                    url: '../../Controller/nosotros/nosotros_switch.php',
                     data: $form.serialize() + $accion,
                     async: false,
                     dataType: "json",
@@ -177,22 +177,23 @@ function guardarDireccion() {
     var data = new FormData();
 
     data.append('btn_accion', 'guardar_direccion');
-    data.append('direccion',  $('#direccion').val());
+    data.append('direccion', $('#direccion').val());
 
     $.ajax({
         method: 'POST',
-        url: '../../Controller/nosotros/switch_controller.php',
-        data:data,
+        url: '../../Controller/nosotros/nosotros_switch.php',
+        data: data,
         async: false,
         dataType: "json",
         processData: false,
-contentType: false,
+        contentType: false,
 
-        success: function () {
+        success: function (res) {
 
+            alertas(res);
         },
         error: function () {
- 
+
         }
     });
 }
@@ -282,7 +283,7 @@ async function iniciarTablaTelefonos($datos) {
 
 async function iniciarTablaCorreos($datos) {
     $('#correos_list').dataTable({
-        data:$datos ,
+        data: $datos,
         language: { "url": "../../lib/DataTables/es.json" },
         select: false,
         destroy: true,
@@ -458,7 +459,7 @@ function refreshTables() {
 
 
 function setinputEdit(opcion) {
-  
+
     $("#input_contacto_edit").removeClass("Correo Red Telefono");
     $("#input_contacto_edit").unmask();
     $("#input_contacto_edit").removeAttr("maxlength");
@@ -489,3 +490,37 @@ function setinputRegistro(opcion) {
 
 
 
+cargarDatos('../../controller/nosotros/nosotros_switch.php', { 'accion': 'getTipoContacto' })
+.then(response => response.json())
+.then(response => gregarOpcionesSelect('select_tipo_contacto', response, 'nombre_tipo_contacto', 'id_tipo_contacto'))
+.then(response => console.log(response))
+.catch(error => { console.error(error) });
+
+
+
+
+async function cargarDatos($url ,$datos) {
+    $data =new FormData();
+
+    $.each( $datos, function( key, value ) {
+        $data.append(key,  value);
+    });
+    
+    return fetch($url,
+    { 
+        method: 'POST',
+        body: $data
+    }
+    );
+}
+
+function gregarOpcionesSelect(domElement, array,indice,valor) {
+    var select = document.getElementsByName(domElement)[0];
+    for (value in array) {
+        var option = document.createElement("option");
+        option.text = (array[value])[indice];
+        option.value= (array[value])[valor];
+        select.add(option);
+    }
+}
+   

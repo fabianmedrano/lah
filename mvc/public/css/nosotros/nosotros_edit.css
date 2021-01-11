@@ -1,23 +1,26 @@
 #container-fileinput-carrusel{
     
-    
-height:auto;
-width: auto;
-   max-width:70%;
-   min-width:70%;
+    height:auto;
+    width: auto;
+   max-width:100%;
+   min-width:100%;
    margin-bottom: 0px;
    word-wrap: break-word;
  
 }
+
+
 .error{
-
-
-
+color: red;
 max-width: 70%;
 min-width: 70%;
 }
+
 .file-preview-thumbnails{
     word-wrap: break-word;
-  
-   
+}
+
+
+.contenedor-nosotros-edit{
+   max-width: 60% !important;
 }

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -8,7 +6,6 @@
   <?php require_once "../base/metadata.php" ?>
 
   <link rel="stylesheet" href="../../public/css/dashboard.css">
-  <link rel="stylesheet" href="../../public/css/estudiante/estudiante.css">
 
 
   <link href="../../public/css/general.css" rel="stylesheet">
@@ -38,34 +35,35 @@
 </head>
 
 <body>
-    <?php require_once "../base/navbarAdmin.php" ?>
+  <?php require_once "../base/navbarAdmin.php" ?>
 
-  <div class="container  ">
-  <div class="row">
-  <h3>
-    Nosotros
-</h3>
-  </div>
+  <div class="container  contenedor-nosotros-edit ">
+    <div class="row">
+      <h3>
+        Nosotros
+      </h3>
+    </div>
 
 
-      <div class="row">
-        <!-- INICIO File Input -->
-        
+    <div class="row">
+      <!-- INICIO File Input -->
+
       <div id="error_fileinput" style="width:100%" class="error" role="alert"></div>
-        
-        <div id="container-fileinput-carrusel">
+
+      <div id="container-fileinput-carrusel">
         <div class="form-group">
-              <label for="inputcarrusel" class="control-label">Carrusel</label>
+          <label for="inputcarrusel" class="control-label">Carrusel</label>
           <input id="inputcarrusel" name="inputcarrusel[]" type="file" multiple>
         </div>
-        </div>
-    
-        <!-- FIN File Input -->
       </div>
+
+      <!-- FIN File Input -->
+    </div>
   </div>
-  
+
 </body>
 
 
-<?php include ("nosotros_edit_fileinput.php") ?>
+<?php include("nosotros_edit_fileinput.php") ?>
+
 </html>

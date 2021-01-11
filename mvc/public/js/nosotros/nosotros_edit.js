@@ -68,17 +68,13 @@ var $rule = [
                         data: $.param($data),
 
                         async: false,
-                        dataType: "json",
+                        dataType : 'json',
 
                         success: function (res) {
-                            console.log(res);
-                            var result = limpiarJson(res);
-                            alertas(JSON.parse(result));
+                            alertas(res);
                         },          
                         error: function (res) {
-                            console.log(res);
-                            var result = limpiarJson(res);
-                            alertas(JSON.parse(result));
+                            alertas((res));
                         }
                     });
                 } else {Swal.fire(

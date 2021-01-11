@@ -1,11 +1,11 @@
 <?php
 require_once "nosotros_controller.php";
 
-if( isset($_REQUEST['accion'] )){
+if (isset($_REQUEST['accion'])) {
 
     $controlador_nosotros = new nosotros_controller();
 
-    switch ($_REQUEST['accion']){
+    switch ($_REQUEST['accion']) {
         case 'update':
             $controlador_nosotros->uptateNosotros($_POST["editor_nosotros"]);
 
@@ -17,6 +17,10 @@ if( isset($_REQUEST['accion'] )){
 
             //  header('Location: ' . BASE_URL . '/View/Nosotros/nosotros_edit.php');
 
+            break;
+
+        case 'getTipoContacto':
+                
             break;
 
 
@@ -42,18 +46,16 @@ if( isset($_REQUEST['accion'] )){
 
             break;
         case 'editar_contacto':
-            $controlador_nosotros->updateContacto($_POST["id_contacto"] ,$_POST["input_contacto_edit"]);
+            $controlador_nosotros->updateContacto($_POST["id_contacto"], $_POST["input_contacto_edit"]);
 
             break;
-            case 'guardar_direccion':
-                $controlador_nosotros->escribirDirreccion($_REQUEST["direccion"]);
-    
-                break;
+        case 'guardar_direccion':
+            $controlador_nosotros->escribirDirreccion($_REQUEST["direccion"]);
+
+            break;
 
         default:
 
             break;
-
     }
-
 }
