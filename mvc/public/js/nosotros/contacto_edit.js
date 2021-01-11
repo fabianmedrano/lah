@@ -130,7 +130,7 @@ $(document).ready(function () {
                 var $accion = "&btn_accion=editar_contacto";
                 $.ajax({
                     method: 'POST',
-                    url: '../../Controller/nosotros/switch_controller.php',
+                    url: '../../Controller/nosotros/nosotros_switch.php',
                     data: $form.serialize() + $accion,
                     async: false,
                     dataType: "json",
@@ -329,7 +329,7 @@ async function iniciarTablaCorreos($datos) {
 function getTelefonos() {
     respuesta = [];
     $.ajax({
-        url: "../../Controller/nosotros/switch_controller.php",
+        url: "../../Controller/nosotros/nosotros_switch.php",
         type: "POST",
         dataType: "json",
         data: { "btn_accion": "get_telefonos" },
@@ -348,7 +348,7 @@ function getTelefonos() {
 function getRedes() {
     respuesta = [];
     $.ajax({
-        url: "../../Controller/nosotros/switch_controller.php",
+        url: "../../Controller/nosotros/nosotros_switch.php",
         type: "POST",
         dataType: "json",
         data: { "btn_accion": "get_redes" },
@@ -368,7 +368,7 @@ function getRedes() {
 function getCorreos() {
     respuesta = [];
     $.ajax({
-        url: "../../Controller/nosotros/switch_controller.php",
+        url: "../../Controller/nosotros/nosotros_switch.php",
         type: "POST",
         dataType: "json",
         data: { "btn_accion": "get_correos" },
@@ -401,7 +401,7 @@ function deleteContacto(id) {
         if (result.value) {
             $.ajax({
                 method: "POST",
-                url: "../../Controller/nosotros/switch_controller.php",
+                url: "../../Controller/nosotros/nosotros_switch.php",
                 data: { "btn_accion": "eliminar_contacto", "id_contacto": id },
                 async: false,
                 dataType: "json",
