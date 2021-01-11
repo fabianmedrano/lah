@@ -165,7 +165,11 @@ $(document).ready(function () {
 
 
 
-
+    cargarDatos('../../controller/nosotros/nosotros_switch.php', { 'accion': 'getTipoContacto' })
+    .then(response => response.json())
+    .then(response => gregarOpcionesSelect('select_tipo_contacto', response, 'nombre_tipo_contacto', 'id_tipo_contacto'))
+    .then(response => console.log(response))
+    .catch(error => { console.error(error) }); // ERROR AQUI
 
 
 
@@ -490,11 +494,7 @@ function setinputRegistro(opcion) {
 
 
 
-cargarDatos('../../controller/nosotros/nosotros_switch.php', { 'accion': 'getTipoContacto' })
-.then(response => response.json())
-.then(response => gregarOpcionesSelect('select_tipo_contacto', response, 'nombre_tipo_contacto', 'id_tipo_contacto'))
-.then(response => console.log(response))
-.catch(error => { console.error(error) });
+
 
 
 

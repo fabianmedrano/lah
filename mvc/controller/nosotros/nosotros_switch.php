@@ -20,7 +20,7 @@ if (isset($_REQUEST['accion'])) {
             break;
 
         case 'getTipoContacto':
-                
+            $controlador_nosotros->cargarTipoContactos();
             break;
 
 

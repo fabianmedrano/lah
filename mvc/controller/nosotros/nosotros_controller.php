@@ -81,6 +81,14 @@ class nosotros_controller
     }
 
     
+    public function cargarTipoContactos()
+    {
+        $query = "call db_liceo_web.sp_obtenerTipoContacto();";
+        $contactos =query_database::findAll($query) ;
+    
+        echo json_encode( $contactos);
+    }
+
     static public function updateContacto($id,$contacto)
     {
             $respuesta = DataNosotros::updateContacto($id,$contacto);
