@@ -30,15 +30,15 @@ if (isset($_REQUEST['accion'])) {
 
         case 'get_telefonos':
 
-            echo (json_encode($controlador_nosotros->getTelefonos()));
+        $controlador_nosotros->getTelefonos();
             break;
 
         case 'get_redes':
-            echo (json_encode($controlador_nosotros->getRedes()));
+         $controlador_nosotros->getRedes();
             break;
 
         case 'get_correos':
-            echo (json_encode($controlador_nosotros->getCorreos()));
+           $controlador_nosotros->getCorreos();
             break;
 
         case 'eliminar_contacto':

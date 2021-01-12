@@ -4,11 +4,17 @@ $(document).ready(function () {
     $tel = getTelefonos();
     $red = getRedes();
     $email = getCorreos();
+    console.log($red);
+    console.log($email);
+    console.log($tel);
     iniciarTablaTelefonos($tel);
     iniciarTablaRedes($red);
     iniciarTablaCorreos($email);
 
     $(".Telefono").mask("9999-9999");
+
+
+
 
     $("#select_tipo_contacto").change(function () {
         limpiarError();
@@ -20,8 +26,11 @@ $(document).ready(function () {
 
             $('#btn_accion').prop("disabled", false);
         }
-        setinputRegistro($("#select_tipo_contacto option:selected").text());
+        setinputRegistro($("#select_tipo_contacto option:selected").text(), $("#select_tipo_contacto option:selected").val());
     });
+
+
+
 
     var $ruleUrl = [{ error: "required_content", msg: "Debe ingresar una url" },
     { error: "valid", msg: "URL no valida." },];
@@ -30,6 +39,9 @@ $(document).ready(function () {
     { error: "valid", msg: "Correo no valido" },];
 
     var $ruletel = [{ error: "required_content", msg: "Debe ingresar un teléfono" }];
+
+
+
 
 
     $("#input_contacto_edit").bind(" change click keyup input paste", function (event) {
@@ -69,33 +81,33 @@ $(document).ready(function () {
             closeOnCancel: false
         }).then((result) => {
             if (result.value) {
-                console.log('todo bien por haora');
-                var $form = $("#form_contacto_create");
-                var $accion = "&btn_accion=guardar_contacto";
+
+
+
+                $data = $('#form_contacto_create').serializeArray();
+                $data.push({ name: 'accion', value: 'guardar_contacto' });
+                console.log($data);
                 $.ajax({
-                    method: 'POST',
-                    url: '../../Controller/nosotros/nosotros_switch.php',
-                    data: $form.serialize() + $accion,
-                    async: false,
-                    dataType: "json",
-
-                    success: function () {
+                    url: '../../controller/nosotros/nosotros_switch.php',
+                    type: 'POST',
+                    data: $.param($data),
+                    success: function (res) {
+                        
                         refreshTables();
-
-                        Swal.fire(
-                            'Guardada!',
-                            'Infomacion guardada de forma exitosa',
-                            'success'
-                        )
+                        console.log(res);
+                        var result = limpiarJson(res);
+                        alertas(JSON.parse(result)); // error con este parse
                     },
-                    error: function () {
-                        Swal.fire(
-                            "Ha ocurrido un error",
-                            "intente refrescar la pagina",
-                            "error"
-                        );
+                    error: function (res) {
+                        
+                        refreshTables();
+                        console.log(res);
+                        var result = limpiarJson(res);
+                        alertas(JSON.parse(result));
                     }
+                    
                 });
+  
             } else {
                 Swal.fire(
                     'Cancelado',
@@ -169,7 +181,8 @@ $(document).ready(function () {
     .then(response => response.json())
     .then(response => gregarOpcionesSelect('select_tipo_contacto', response, 'nombre_tipo_contacto', 'id_tipo_contacto'))
     .then(response => console.log(response))
-    .catch(error => { console.error(error) }); // ERROR AQUI
+    .catch(error => { console.error(error) });
+    
 
 
 
@@ -237,7 +250,7 @@ async function iniciarTablaRedes($datos) {
                 width: "5%",
                 className: "text-center bg-white",
                 data: function (data, type, val) {
-                    return "<button id='" + data.idnoticia + "' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar contacto' onclick=' deleteContacto(" + data.idcontacto + ")' class='btn btn-outline-danger'><i class='far fa-trash-alt' ></i></button>";
+                    return "<button id='" + data.idcontacto + "' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar contacto' onclick=' deleteContacto(" + data.idcontacto + ")' class='btn btn-outline-danger'><i class='far fa-trash-alt' ></i></button>";
                 }
             }
         ],
@@ -278,7 +291,7 @@ async function iniciarTablaTelefonos($datos) {
                 width: "5%",
                 className: "text-center bg-white",
                 data: function (data, type, val) {
-                    return "<button id='" + data.idnoticia + "' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar noticia' onclick=' deleteContacto(" + data.idcontacto + ")' class='btn btn-outline-danger'><i class='far fa-trash-alt' ></i></button>";
+                    return "<button id='" + data.idcontacto + "' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar noticia' onclick=' deleteContacto(" + data.idcontacto + ")' class='btn btn-outline-danger'><i class='far fa-trash-alt' ></i></button>";
                 }
             }
         ],
@@ -336,7 +349,7 @@ function getTelefonos() {
         url: "../../Controller/nosotros/nosotros_switch.php",
         type: "POST",
         dataType: "json",
-        data: { "btn_accion": "get_telefonos" },
+        data: { "accion": "get_telefonos" },
         async: false,
         success: function (data) {
             respuesta = data;
@@ -355,7 +368,7 @@ function getRedes() {
         url: "../../Controller/nosotros/nosotros_switch.php",
         type: "POST",
         dataType: "json",
-        data: { "btn_accion": "get_redes" },
+        data: { "accion": "get_redes" },
         async: false,
         success: function (data) {
             respuesta = data;
@@ -369,13 +382,15 @@ function getRedes() {
 }
 
 
+
+
 function getCorreos() {
     respuesta = [];
     $.ajax({
         url: "../../Controller/nosotros/nosotros_switch.php",
         type: "POST",
         dataType: "json",
-        data: { "btn_accion": "get_correos" },
+        data: { "accion": "get_correos" },
         async: false,
         success: function (data) {
             respuesta = data;
@@ -388,8 +403,6 @@ function getCorreos() {
     return respuesta;
 }
 // fin get data
-
-
 function deleteContacto(id) {
 
     Swal.fire({
@@ -453,43 +466,44 @@ function abrirModalEdit(id, tipo, contacto) {
 
 
 function refreshTables() {
-
     $('#telefonos_list').DataTable().clear().rows.add(getTelefonos()).draw();
-
     $('#red_list').DataTable().clear().rows.add(getRedes()).draw();
-
     $('#correos_list').DataTable().clear().rows.add(getCorreos()).draw();
 }
 
 
 function setinputEdit(opcion) {
 
-    $("#input_contacto_edit").removeClass("Correo Red Telefono");
+    $("#input_contacto_edit").removeClass();
+    $("#input_contacto").addClass("form-control");
+    $("#input_contacto").addClass(opcion);
+
     $("#input_contacto_edit").unmask();
     $("#input_contacto_edit").removeAttr("maxlength");
 
     switch (opcion) {
         case 1:
-            $("#input_contacto_edit").addClass('Telefono');
+            $("#input_contacto_edit").addClass("opcion-1");
             break;
         case 2:
-            $("#input_contacto_edit").addClass('Red');
-            break;
-        case 3:
-            $("#input_contacto_edit").addClass('Correo');
+            $("#input_contacto_edit").addClass("opcion-2");
             break;
         default:
+            $("#input_contacto_edit").addClass("opcion-3");
             break;
     }
 
 }
-function setinputRegistro(opcion) {
+function setinputRegistro(opcion, val) {
     (opcion == 'Selecione') ? $('#label_contacto').text('contacto') : $('#label_contacto').text(opcion);
     $("#input_contacto").val('');
-    $("#input_contacto").removeClass("Correo Red Telefono");
+    $("#input_contacto").removeClass();
     $("#input_contacto").removeAttr("maxlength");
     $("#input_contacto").unmask();
+    $("#input_contacto").addClass("form-control");
     $("#input_contacto").addClass(opcion);
+    $("#input_contacto").addClass("opcion-"+val);
+    
 }
 
 
