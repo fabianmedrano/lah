@@ -91,17 +91,15 @@ class nosotros_controller
         echo json_encode( $contactos);
     }
     static public function escribirDirreccion($direccion){
-        $file = fopen( "../../controller/nosotros/adress.txt", "w");
-        echo( $file);
-        fwrite($file, $direccion . PHP_EOL);
-        fclose($file);
+     
+            $file = fopen( "../../controller/nosotros/adress.txt", "w");
+           
+            fwrite($file, $direccion . PHP_EOL);
+            fclose($file);
+    
+
     }
 
-    static public function updateContacto($id,$contacto)
-    {
-            $respuesta = DataNosotros::updateContacto($id,$contacto);
-            return $respuesta; 
-    }
 
     
 }

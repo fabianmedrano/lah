@@ -192,7 +192,7 @@ function guardarDireccion() {
 
     var data = new FormData();
 
-    data.append('btn_accion', 'guardar_direccion');
+    data.append('accion', 'guardar_direccion');
     data.append('direccion', $('#direccion').val());
 
     $.ajax({
@@ -208,8 +208,8 @@ function guardarDireccion() {
 
             alertas(res);
         },
-        error: function () {
-
+        error: function (res) {
+            alertas(res);
         }
     });
 }

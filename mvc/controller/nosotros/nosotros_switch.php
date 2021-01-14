@@ -45,10 +45,7 @@ if (isset($_REQUEST['accion'])) {
             $controlador_nosotros->eliminarContacto($_POST["id_contacto"]);
 
             break;
-        case 'editar_contacto':
-            $controlador_nosotros->updateContacto($_POST["id_contacto"], $_POST["input_contacto_edit"]);
 
-            break;
         case 'guardar_direccion':
             $controlador_nosotros->escribirDirreccion($_REQUEST["direccion"]);
 
