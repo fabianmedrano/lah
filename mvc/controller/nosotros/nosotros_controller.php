@@ -73,13 +73,14 @@ class nosotros_controller
         echo json_encode( $teletonos);
     }
 
-    static public function deleteContacto($id)
+    public function eliminarContacto($id)
     {
         $query = "call db_liceo_web.sp_eliminarContacto(?);";
         $binParam = new BindParam();
         $binParam->add('i',$id); 
-        echo json_encode(query_database::delete_update_insert($query,$binParam) );
+        echo json_encode(query_database::CUD($query,$binParam) );
     }
+
 
     
     public function cargarTipoContactos()

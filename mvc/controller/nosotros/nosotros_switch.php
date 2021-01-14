@@ -42,7 +42,7 @@ if (isset($_REQUEST['accion'])) {
             break;
 
         case 'eliminar_contacto':
-            $controlador_nosotros->deleteContacto($_POST["id_contacto"]);
+            $controlador_nosotros->eliminarContacto($_POST["id_contacto"]);
 
             break;
         case 'editar_contacto':

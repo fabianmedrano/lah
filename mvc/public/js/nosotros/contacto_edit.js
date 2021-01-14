@@ -47,18 +47,18 @@ $(document).ready(function () {
     $("#input_contacto_edit").bind(" change click keyup input paste", function (event) {
 
         $contacto = $("#input_contacto_edit").val().trim();
-        ($("#input_contacto_edit").hasClass("Red")) ? console.log(validarURL($contacto, $ruleUrl, $('#error_contacto_edit'))) : '';
-        ($("#input_contacto_edit").hasClass("Telefono")) ? console.log(validarTelefono($contacto, $ruletel, $('#error_contacto_edit'))) : '';
-        ($("#input_contacto_edit").hasClass("Correo")) ? console.log(validarEmail($contacto, $ruleemail, $('#error_contacto_edit'))) : '';
+        ($("#input_contacto_edit").hasClass("opcion-3")) ? console.log(validarURL($contacto, $ruleUrl, $('#error_contacto_edit'))) : '';
+        ($("#input_contacto_edit").hasClass("opcion-1")) ? console.log(validarTelefono($contacto, $ruletel, $('#error_contacto_edit'))) : '';
+        ($("#input_contacto_edit").hasClass("opcion-2")) ? console.log(validarEmail($contacto, $ruleemail, $('#error_contacto_edit'))) : '';
 
     });
 
     $("#input_contacto").bind(" change click keyup input paste", function (event) {
 
         $contacto = $("#input_contacto").val().trim();
-        ($("#input_contacto").hasClass("Red")) ? console.log(validarURL($contacto, $ruleUrl, $('#error_contacto'))) : '';
-        ($("#input_contacto").hasClass("Telefono")) ? console.log(validarTelefono($contacto, $ruletel, $('#error_contacto'))) : '';
-        ($("#input_contacto").hasClass("Correo")) ? console.log(validarEmail($contacto, $ruleemail, $('#error_contacto'))) : '';
+        ($("#input_contacto").hasClass("opcion-3")) ? console.log(validarURL($contacto, $ruleUrl, $('#error_contacto'))) : '';
+        ($("#input_contacto").hasClass("opcion-1")) ? console.log(validarTelefono($contacto, $ruletel, $('#error_contacto'))) : '';
+        ($("#input_contacto").hasClass("opcion-2")) ? console.log(validarEmail($contacto, $ruleemail, $('#error_contacto'))) : '';
 
     });
 
@@ -92,22 +92,22 @@ $(document).ready(function () {
                     type: 'POST',
                     data: $.param($data),
                     success: function (res) {
-                        
+
                         refreshTables();
                         console.log(res);
                         var result = limpiarJson(res);
                         alertas(JSON.parse(result)); // error con este parse
                     },
                     error: function (res) {
-                        
+
                         refreshTables();
                         console.log(res);
                         var result = limpiarJson(res);
                         alertas(JSON.parse(result));
                     }
-                    
+
                 });
-  
+
             } else {
                 Swal.fire(
                     'Cancelado',
@@ -178,11 +178,10 @@ $(document).ready(function () {
 
 
     cargarDatos('../../controller/nosotros/nosotros_switch.php', { 'accion': 'getTipoContacto' })
-    .then(response => response.json())
-    .then(response => gregarOpcionesSelect('select_tipo_contacto', response, 'nombre_tipo_contacto', 'id_tipo_contacto'))
-    .then(response => console.log(response))
-    .catch(error => { console.error(error) });
-    
+        .then(response => response.json())
+        .then(response => gregarOpcionesSelect('select_tipo_contacto', response, 'nombre_tipo_contacto', 'id_tipo_contacto'))
+        .catch(error => { console.error(error) });
+
 
 
 
@@ -229,10 +228,10 @@ async function iniciarTablaRedes($datos) {
         columns: [
             { title: "Redes:", data: "contacto" },
 
-            { title: "Editar" },
-            { title: "Eliminar" },
+            { title: "Eliminar" }
         ],
         columnDefs: [
+
             {
                 targets: 1,
                 data: null,
@@ -240,17 +239,7 @@ async function iniciarTablaRedes($datos) {
                 width: "5%",
                 className: "text-center bg-white",
                 data: function (data, type, val) {
-                    return "<button  type='button' data-toggle='tooltip' data-placement='top' title='red noticia' class='btn btn-outline-success'   onclick=' abrirModalEdit(" + data.idcontacto + "," + data.tipo_contacto + ", " + '"' + data.contacto + '"' + ")'><i class=\"fas fa-edit\"></i></button>";
-                }
-            },
-            {
-                targets: 2,
-                data: null,
-                orderable: false,
-                width: "5%",
-                className: "text-center bg-white",
-                data: function (data, type, val) {
-                    return "<button id='" + data.idcontacto + "' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar contacto' onclick=' deleteContacto(" + data.idcontacto + ")' class='btn btn-outline-danger'><i class='far fa-trash-alt' ></i></button>";
+                    return "<button id='" + data.id_contacto + "' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar contacto' onclick=' deleteContacto(" + data.id_contacto + ")' class='btn btn-outline-danger'><i class='far fa-trash-alt' ></i></button>";
                 }
             }
         ],
@@ -270,10 +259,10 @@ async function iniciarTablaTelefonos($datos) {
         columns: [
             { title: "Teléfonos :", data: "contacto" },
 
-            { title: "Editar" },
-            { title: "Eliminar" },
+            { title: "Eliminar" }
         ],
         columnDefs: [
+
             {
                 targets: 1,
                 data: null,
@@ -281,17 +270,7 @@ async function iniciarTablaTelefonos($datos) {
                 width: "5%",
                 className: "text-center bg-white",
                 data: function (data, type, val) {
-                    return "<button  type='button' data-toggle='tooltip' data-placement='top' title='Modificar noticia' class='btn btn-outline-success'   onclick=' abrirModalEdit(" + data.idcontacto + "," + data.tipo_contacto + ", " + '"' + data.contacto + '"' + ")'><i class=\"fas fa-edit\"></i></button>";
-                }
-            },
-            {
-                targets: 2,
-                data: null,
-                orderable: false,
-                width: "5%",
-                className: "text-center bg-white",
-                data: function (data, type, val) {
-                    return "<button id='" + data.idcontacto + "' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar noticia' onclick=' deleteContacto(" + data.idcontacto + ")' class='btn btn-outline-danger'><i class='far fa-trash-alt' ></i></button>";
+                    return "<button id='" + data.id_contacto + "' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar noticia' onclick=' deleteContacto(" + data.id_contacto + ")' class='btn btn-outline-danger'><i class='far fa-trash-alt' ></i></button>";
                 }
             }
         ],
@@ -311,10 +290,10 @@ async function iniciarTablaCorreos($datos) {
         columns: [
             { title: "Correos:", data: "contacto" },
 
-            { title: "Editar" },
-            { title: "Eliminar" },
+            { title: "Eliminar" }
         ],
         columnDefs: [
+
             {
                 targets: 1,
                 data: null,
@@ -322,17 +301,7 @@ async function iniciarTablaCorreos($datos) {
                 width: "5%",
                 className: "text-center bg-white",
                 data: function (data, type, val) {
-                    return "<button  type='button' data-toggle='tooltip' data-placement='top' title='Modificar correo' class='btn btn-outline-success'   onclick=' abrirModalEdit(" + data.idcontacto + "," + data.tipo_contacto + ", " + '"' + data.contacto + '"' + ")'><i class=\"fas fa-edit\"></i></button>";
-                }
-            },
-            {
-                targets: 2,
-                data: null,
-                orderable: false,
-                width: "5%",
-                className: "text-center bg-white",
-                data: function (data, type, val) {
-                    return "<button id='" + data.idnoticia + "' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar correo' onclick=' deleteContacto(" + data.idcontacto + ")' class='btn btn-outline-danger'><i class='far fa-trash-alt' ></i></button>";
+                    return "<button id='" + data.idnoticia + "' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar correo' onclick=' deleteContacto(" + data.id_contacto + ")' class='btn btn-outline-danger'><i class='far fa-trash-alt' ></i></button>";
                 }
             }
         ],
@@ -403,8 +372,10 @@ function getCorreos() {
     return respuesta;
 }
 // fin get data
-function deleteContacto(id) {
-
+function deleteContacto($id) {
+    $data = [];
+    $data.push({ name: 'accion', value: 'eliminar_contacto' });
+    $data.push({ name: 'id_contacto',value: $id });
     Swal.fire({
         title: '¿Está seguro?',
         text: "¡Se eliminara esta contacto",
@@ -416,20 +387,16 @@ function deleteContacto(id) {
         cancelButtonText: "Cancelar",
     }).then((result) => {
         if (result.value) {
+
+
             $.ajax({
-                method: "POST",
-                url: "../../Controller/nosotros/nosotros_switch.php",
-                data: { "btn_accion": "eliminar_contacto", "id_contacto": id },
-                async: false,
-                dataType: "json",
-                success: function () {
+                url: '../../controller/nosotros/nosotros_switch.php',
+                type: 'POST',
+                dataType:'json',
+                data: $.param($data),
+                success: function (res) {
                     refreshTables();
-                    Swal.fire(
-                        'Eliminada!',
-                        'contacto ha sido eliminada',
-                        'success'
-                    )
-                    $('#' + id).parent().parent().remove();
+                    alertas((res));
 
                 },
                 error: function () {
@@ -502,8 +469,8 @@ function setinputRegistro(opcion, val) {
     $("#input_contacto").unmask();
     $("#input_contacto").addClass("form-control");
     $("#input_contacto").addClass(opcion);
-    $("#input_contacto").addClass("opcion-"+val);
-    
+    $("#input_contacto").addClass("opcion-" + val);
+
 }
 
 
@@ -513,28 +480,27 @@ function setinputRegistro(opcion, val) {
 
 
 
-async function cargarDatos($url ,$datos) {
-    $data =new FormData();
+async function cargarDatos($url, $datos) {
+    $data = new FormData();
 
-    $.each( $datos, function( key, value ) {
-        $data.append(key,  value);
+    $.each($datos, function (key, value) {
+        $data.append(key, value);
     });
-    
+
     return fetch($url,
-    { 
-        method: 'POST',
-        body: $data
-    }
+        {
+            method: 'POST',
+            body: $data
+        }
     );
 }
 
-function gregarOpcionesSelect(domElement, array,indice,valor) {
+function gregarOpcionesSelect(domElement, array, indice, valor) {
     var select = document.getElementsByName(domElement)[0];
     for (value in array) {
         var option = document.createElement("option");
         option.text = (array[value])[indice];
-        option.value= (array[value])[valor];
+        option.value = (array[value])[valor];
         select.add(option);
     }
 }
-   

@@ -116,7 +116,6 @@ require_once  "../../controller/nosotros/nosotros_controller.php";
               </div>
               <select class="custom-select" name="select_tipo_contacto" id="select_tipo_contacto">
                 <option selected>Selecione</option>
-              
           
               </select>
 
