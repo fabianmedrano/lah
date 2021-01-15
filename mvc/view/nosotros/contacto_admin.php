@@ -86,7 +86,8 @@ require_once  "../../controller/nosotros/nosotros_controller.php";
           }
           echo trim($direccion,"\t");
           fclose($file);
-          ?></textarea>
+          ?>
+          </textarea>
         </div>
 
         <button class="btn btn-success" id="guardar_direccion" onclick=" guardarDireccion()">Guardar dirreción</button>

@@ -109,13 +109,13 @@ function deletePersonal(id) {
                 data:$data,
                 async: false,
                 dataType: "json",
-                success: function () {
+                success: function (res) {
                   var result = limpiarJson(res);
                     alertas(JSON.parse(result));
-                    $('#'+id).parent().parent().remove();
+                    $('#tb_estudiantes').DataTable().clear().rows.add(getEstudiantes()).draw();
 
                 },
-                error: function () {
+                error: function (res) {
                     var result = limpiarJson(res);
                     alertas(JSON.parse(result));
                 }

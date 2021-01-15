@@ -72,12 +72,12 @@
 
           
             <span class="border form-row col-md-7 mt-3">
-            <div class="form-row mt-3">    
+            <div class="form-row my-3   pr-4">    
               <div class="col  ">
 
                 <label for="in_contacto_telefono">Telefono</label>
                 <div class="input-group ">
-                <div class="input-group-append">
+                <div class="input-group-append ">
                     <input type="button" class="btn btn-success" onclick="agregarContacto('TELEFÓNO','in_contacto_telefono')" value="agregar">
                   </div>
                   <input type="text" class="form-control" id="in_contacto_telefono" name="in_contacto_telefono" placeholder="888888888" >
@@ -86,7 +86,7 @@
               </div>
 
               </div>
-              <div class="form-row mb-3">    
+              <div class="form-row my-3   pr-4">    
               <div class="col">
 
                 <label for="in_contacto_correo">Correo</label>

@@ -31,7 +31,7 @@ function getEstudiantes() {
 function iniciarTabla() {
     $('#tb_estudiantes').dataTable({
         data: getEstudiantes(),
-        language: { "url": "../../configDatatabble.json" },
+        language: { "url": "../../lib/DataTables/es.json" },
         select: false,
         destroy: true,
         "scrollx": true,
@@ -96,15 +96,15 @@ function deleteEstudiante(id) {
 
                 success: function (res) {
                     console.log(res);
-                    var result = limpiarJson(res);
-                    alertas(JSON.parse(result));
+                    alertas(res);
                     
-                    $('#'+id).parent().parent().remove();
+                     $('#tb_estudiantes').DataTable().clear().rows.add(getEstudiantes()).draw();
+                 
                 },          
                 error: function (res) {
                     console.log(res);
                     var result = limpiarJson(res);
-                    alertas(JSON.parse(result));
+                    alertas(result);
                     
                 }
            
@@ -123,4 +123,7 @@ function deleteEstudiante(id) {
 
 function goEditEstudiante(id) {
     window.location.href ="/view/estudiante/estudiante_edit.php?estudiante="+id;
+} 
+function abrirModal() {
+    window.location.href ="/view/estudiante/estudiante_create.php";
 } 

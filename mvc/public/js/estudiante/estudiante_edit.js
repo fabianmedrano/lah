@@ -168,7 +168,7 @@ function agregarContacto($tipoContacto, $input) { //metodo para agregar contacto
 
 
 $(document).on('click', '.borrar_contacto', function (event) {
-    event.preventDefault();// aqui hay que borrar lo pero de la base de datos
+    event.preventDefault();
    Swal.fire({
     title: '¿Esta seguro?',
     text: "¡Se eliminar este contacto¡",

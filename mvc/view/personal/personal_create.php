@@ -73,7 +73,7 @@
 
           
             <span class="border form-row col-md-7 mt-3">
-            <div class="form-row mt-3">    
+            <div class="form-row my-3   pr-4">    
               <div class="col  ">
 
                 <label for="in_contacto_telefono">Telefono</label>
@@ -87,7 +87,7 @@
               </div>
 
               </div>
-              <div class="form-row mb-3">    
+              <div class="form-row my-3   pr-4">    
               <div class="col">
 
                 <label for="in_contacto_correo">Correo</label>

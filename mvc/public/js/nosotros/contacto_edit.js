@@ -205,11 +205,10 @@ function guardarDireccion() {
         contentType: false,
 
         success: function (res) {
-
-            alertas(res);
+            console.log(res);
         },
         error: function (res) {
-            alertas(res);
+            console.log(res);
         }
     });
 }

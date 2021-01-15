@@ -55,13 +55,15 @@ function guardarPersonal() {
                     data: $.param($data),
                     success: function (res) {
                         console.log(res);
+                        
                         var result = limpiarJson(res);
-                        alertas(JSON.parse(result));
+                        alertas(JSON.parse(result)); // error con este parse
+                   
                     },          
                     error: function (res) {
-                        console.log(res);
+                        
                         var result = limpiarJson(res);
-                        alertas(JSON.parse(result));
+                        alertas(JSON.parse(result)); // error con este parse
                     }
                     
                 });
@@ -146,7 +148,7 @@ function agregarContacto($tipoContacto, $input) { //metodo para agregar contacto
                     success: function (res) {
                         console.log(res);
                         var result = limpiarJson(res);
-                        alertas(JSON.parse(result)); // error con este parse
+                        alertas(JSON.parse(result)); 
                         $("#tb_contactos").append('<tr><td>' + $tipoContacto + '</td><td>' + $contacto + '</td> <td>    <input  type="button" class="btn btn-danger borrar_contacto" value="quitar"></td></tr>');
                         resetCamposContactos()
                   
