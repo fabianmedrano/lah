@@ -47,7 +47,10 @@ require_once "../../controller/nosotros/nosotros_controller.php";
 
 
   <div class="container contenedor-nosotros-edit  ">
+    
+  <?php require_once "../base/menuVertical.php" ?>
     <div class="row">
+
       <h3>
         Nosotros
       </h3>

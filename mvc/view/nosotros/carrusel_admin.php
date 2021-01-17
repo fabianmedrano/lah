@@ -37,30 +37,40 @@
 <body>
   <?php require_once "../base/navbarAdmin.php" ?>
 
-  <div class="container  contenedor-nosotros-edit ">
+
+  <div class="container-fluid">
     <div class="row">
-      <h3>
-        Nosotros
-      </h3>
-    </div>
+      <?php require_once "../base/menuVertical.php" ?>
+
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+        <div class="container  contenedor-nosotros-edit ">
+
+          <div class="row">
+            <h3>
+              Nosotros
+            </h3>
+          </div>
 
 
-    <div class="row">
-      <!-- INICIO File Input -->
+          <div class="row">
+            <!-- INICIO File Input -->
 
-      <div id="error_fileinput" style="width:100%" class="error" role="alert"></div>
+            <div id="error_fileinput" style="width:100%" class="error" role="alert"></div>
 
-      <div id="container-fileinput-carrusel">
-        <div class="form-group">
-          <label for="inputcarrusel" class="control-label">Carrusel</label>
-          <input id="inputcarrusel" name="inputcarrusel[]" type="file" multiple>
+            <div id="container-fileinput-carrusel">
+              <div class="form-group">
+                <label for="inputcarrusel" class="control-label">Carrusel</label>
+                <input id="inputcarrusel" name="inputcarrusel[]" type="file" multiple>
+              </div>
+            </div>
+
+            <!-- FIN File Input -->
+          </div>
         </div>
-      </div>
-
-      <!-- FIN File Input -->
+      </main>
     </div>
   </div>
-
 </body>
 
 

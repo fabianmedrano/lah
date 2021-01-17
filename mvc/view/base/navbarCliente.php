@@ -11,8 +11,8 @@
             <div class="collapse navbar-collapse site-navigation" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto site-menu">
                     <li class="active"><a href="#">NOTICIAS</a></li>
-                    <li class=""><a href="#">PERSONAL</a></li>
-                    <li class=""><a href="#">SULICITUDES</a></li>
+                    <li class=""><a href="../personal/personal.php">PERSONAL</a></li>
+                    <li class=""><a href="../constancia/solicitud_constancia.php">SULICITUDES</a></li>
                 </ul>
             </div>
         </div>
