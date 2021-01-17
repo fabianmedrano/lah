@@ -72,6 +72,25 @@ class personal_controller
         echo json_encode(query_database::delete_update_insert($query, $binParam));
     }
 
+    
+    
+
+    public function insertarRol( $rol)
+    {   
+        $binParam = new BindParam();   
+        $query = "call sp_insertarRol(?)";
+          $binParam->add('s', $rol);
+        echo json_encode(query_database::delete_update_insert($query, $binParam));
+    }
+
+    public function eliminarRol($id)
+    {
+        $query = "call db_liceo_web.sp_eliminarrol(?);";
+        $binParam = new BindParam();
+        $binParam->add('i',$id); 
+        echo json_encode(query_database::delete_update_insert($query,$binParam) );
+    }
+
 
     public function eliminarContactoPersonal($id)
     {

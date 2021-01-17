@@ -3,6 +3,8 @@ $(document).ready(function() {
 
 
     iniciarTabla();
+
+
 });
 
 
@@ -48,7 +50,7 @@ function getRoles() {
 function iniciarTabla() {
     $('#tb_personal').dataTable({
         data: getPersonal(),
-        language: { "url": "../../configDatatabble.json" },
+        language: { "url": "../../lib/DataTables/es.json" },
         select: false,
         destroy: true,
         "scrollx": true,
@@ -112,7 +114,7 @@ function deletePersonal(id) {
                 success: function (res) {
                   var result = limpiarJson(res);
                     alertas(JSON.parse(result));
-                    $('#tb_estudiantes').DataTable().clear().rows.add(getEstudiantes()).draw();
+                    $('#tb_personal').DataTable().clear().rows.add(getEstudiantes()).draw();
 
                 },
                 error: function (res) {
@@ -141,83 +143,5 @@ function goEditpersonal(id) {
 
 
 
-function iniciarTablaRoles() {
-    $('#tb_roles').dataTable({
-        data: getRoles(),
-        responsive: true,
-        language: { "url": "../../configDatatabble.json" },
-        select: false,
-        destroy: true,
-        "scrollx": true,
-        columns: [
-            { title: "Función", data: "rol" },
-            
-            { title: "Eliminar" },
-        ],
-        columnDefs: [
-
-            {
-                targets: 1,
-                data: null,
-                orderable: false,
-                width: "5%",
-                className: "text-center bg-white",
-                data: function (data, type, val) {
-                    return "<button id='"+data.id_rol+"' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar noticia' onclick='deleteROL(" + data.id_rol + ")' class='btn btn-outline-danger'><i class='far fa-trash-alt' ></i></button>";
-                }
-            }
-        ],
-    });
-}
- function abrirModalRoles() {
-     console.log('abriendo modal');
-    iniciarTablaRoles();
-    $('#exampleModal').modal('show') 
-
- }
 
 
-
-
- 
-function guardarRolPersonal() {
-    if ($form.valid()) {
-        Swal.fire({
-            title: '¿Esta seguro?',
-            text: "Se guardara este personal!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '¡Guardar!'
-        }).then((result) => {
-            if (result.value) {
-
-                $data = $('#form_create_personal').serializeArray();
-                $data.push({ name: 'in_contactos', value: contactosToJson() });
-                $data.push({ name: 'accion', value: 'insert_rol' });
-                console.log($data);
-                $.ajax({
-                    url: '../../controller/personal/personal_switch.php',
-                    type: 'POST',
-                    data: $.param($data),
-                    success: function (res) {
-                        console.log(res);
-                        var result = limpiarJson(res);
-                        alertas(JSON.parse(result)); // error con este parse
-                    },
-                    error: function (res) {
-                        console.log(res);
-                        var result = limpiarJson(res);
-                        alertas(JSON.parse(result));
-                    }
-                    
-                });
-   
-            }
-        });
-    } else {
-        console.log('no valido');
-    }
-
-}
