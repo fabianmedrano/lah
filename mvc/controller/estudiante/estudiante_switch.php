@@ -66,7 +66,9 @@ if (isset($_REQUEST['accion'])) {
         case 'deleteContacto':
             $controller->eliminarContactoEstudiante(  $_POST['id_contacto']);
             break;
-    
+            case 'pasar_grado':
+                $controller->pasarGrado();
+                break;
                 
         default:
             echo "Opcion incorecta";

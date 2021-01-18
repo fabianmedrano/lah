@@ -133,4 +133,10 @@ $id =$id['AUTO_INCREMENT']-1;
         $binParam->add('i', $id);
         echo json_encode(query_database::CUD($query, $binParam));
     }
+    public function pasarGrado()
+    {
+        $query = "call db_liceo_web.sp_pasarDeGrado();";
+        $binParam = new BindParam();
+        echo json_encode(query_database::delete_update_insert($query,$binParam) );
+    }
 }

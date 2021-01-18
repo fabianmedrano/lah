@@ -42,7 +42,7 @@
       
             
                 <div class="mb-3">       
-                     <button id="pasar-ano" class="cont-icono btn btn-outline-primary float-right" data-tooltip="tooltip" data-placement="top" title="pasar de año estudiante" onclick="pasarDeAno()"><i class="far fa-plus-square"></i></button>
+                     <button id="pasar-ano" class="cont-icono btn btn-outline-primary float-left" data-tooltip="tooltip" data-placement="top" title="Pasan los estudiantes al siguite grado " onclick="pasarDeAno()"><i class="far fa-calendar-check"></i></button>
           
                     <button id="registarServicios" class="cont-icono btn btn-outline-primary float-right" data-tooltip="tooltip" data-placement="top" title="Agregar estudiante" onclick="abrirModal()"><i class="far fa-plus-square"></i></button>
                 </div>

@@ -139,6 +139,59 @@ function deleteEstudiante(id) {
 
 }
 
+
+function pasarDeAno() {
+
+    Swal.fire({
+        title: '¿Está seguro?',
+        text: "¡Se pasara de año a todos los estudiantes!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Pasar de año!',
+        cancelButtonText: "Cancelar",
+    }).then((result) => {
+            if (result.value) {
+                $data = [];
+                $data.push({ name: 'accion', value: 'pasar_grado' });
+                $.ajax({
+                method: "POST",
+                url:  '../../controller/estudiante/estudiante_switch.php',
+                data:$data,
+                async: false,
+                dataType: "json",
+
+                success: function (res) {
+                    console.log(res);
+                    alertas(res);
+                    
+                     $('#tb_estudiantes').DataTable().clear().rows.add(getEstudiantes()).draw();
+                 
+                },          
+                error: function (res) {
+                    console.log(res);
+                    var result = limpiarJson(res);
+                    alertas(result);
+                    
+                }
+           
+            });
+        }
+        else {
+            Swal.fire(
+                'Cancelado',
+                'Se ha cancelado la acción de eliminar',
+                'error'
+            )
+        }
+    });
+
+}
+
+
+
+
 function goEditEstudiante(id) {
     window.location.href ="/view/estudiante/estudiante_edit.php?estudiante="+id;
 } 
