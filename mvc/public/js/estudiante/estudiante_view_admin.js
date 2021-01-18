@@ -1,8 +1,18 @@
- var   $tablaServicios=[];
+ var  $tabla_estudiantes ;
 $(document).ready(function() {
 
 
+
+    
     iniciarTabla();
+
+
+
+
+
+
+
+
 });
 
 
@@ -29,16 +39,24 @@ function getEstudiantes() {
 
 
 function iniciarTabla() {
-    $('#tb_estudiantes').dataTable({
+   $tabla_estudiantes =  $('#tb_estudiantes').dataTable({
+
+
+
+
+
+
         data: getEstudiantes(),
         language: { "url": "../../lib/DataTables/es.json" },
+        orderCellsTop: true,
+        fixedHeader: true,
         select: false,
         destroy: true,
         "scrollx": true,
         columns: [
             { title: "Nombre", data: "nombre" },
             { title: "Cédula", data: "cedula" },
-            { title: "Grado", data: "id_seccion" },
+            { title: "Grado", data: "grado" },
             { title: "Contacto", data: "contacto" },
 
             { title: "Editar" },

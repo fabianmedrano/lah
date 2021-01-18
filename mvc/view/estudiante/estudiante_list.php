@@ -21,6 +21,13 @@
     <script src="../../public/js/estudiante/estudiante_view_admin.js"></script>
 
     
+<script src="../../public/css/estudiante/estudiante.css"></script>
+    
+
+
+
+
+
     <title>Gestión estudiantes</title>
 </head>
 <body>
@@ -34,7 +41,9 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
       
             
-                <div class="mb-3">
+                <div class="mb-3">       
+                     <button id="pasar-ano" class="cont-icono btn btn-outline-primary float-right" data-tooltip="tooltip" data-placement="top" title="pasar de año estudiante" onclick="pasarDeAno()"><i class="far fa-plus-square"></i></button>
+          
                     <button id="registarServicios" class="cont-icono btn btn-outline-primary float-right" data-tooltip="tooltip" data-placement="top" title="Agregar estudiante" onclick="abrirModal()"><i class="far fa-plus-square"></i></button>
                 </div>
                 <div class="mb-5">

@@ -8,8 +8,12 @@
                 <a class="btn btn-link text-muted" href="../personal/personal_list.php"> PERSONAL</a>
             </li>
             <li class="nav-item">
+                <a class="btn btn-link text-muted" href="../estudiante/estudiante_list.php"> ESTUDIANTES</a>
+            </li>
+            <li class="nav-item">
                 <a class="btn btn-link text-muted" href="../constancia/constancia_list.php"> SOLICITUDES</a>
             </li>
+            
         </ul>
     
         <div id="accordion-n">
