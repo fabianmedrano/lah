@@ -13,48 +13,35 @@ class noticia_controller
 
     static public function uptateNoticia($id, $titulo, $texto, $autor)
     {
-        try {
-            $con = new Conexion();
-            $stmt = $con->getConexion()->prepare("CALL sp_updateNoticia(?,?,?,?);");
-            $stmt->bind_param("isss", $id, $titulo, $texto, $autor);
-            $stmt->execute();
 
+        
+        $binParam = new BindParam();
 
-            $response = [
-                'status' => 'success',
-                'msg' => 'noticia actualizada'
-            ];
-        } catch (PDOException $e) {
+        $query = "CALL db_liceo_web.sp_actualizarNoticia(?,?,?,?);"; // revisar  porque no inserta el nacimiento
+        $binParam->add('i',$id);
+        $binParam->add('s', $titulo);
+        $binParam->add('s', $texto);
+        $binParam->add('s', $autor);
 
-            echo $e->getMessage();
-            $response = [
-                'status' => 'error',
-                'errors' => $e->getMessage()
-            ];
-        } finally {
-            $con->cerrarConexion();
-        }
+        $repuesta = (query_database::CUD($query, $binParam));
 
-        exit(json_encode($response));
+        echo json_encode($repuesta);
+      
     }
 
     static public function getNoticiaID($id)
     {
-        try {
-            $con = new Conexion();
-            $stmt = $con->getConexion()->prepare("CALL sp_getNoticiaID(?);");
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
 
-            $stmt->bind_result($id, $titulo, $descripcion, $fecha, $autor);
-            $stmt->fetch();
-            return array('id' => $id, 'titulo' => $titulo, 'descripcion' => $descripcion, 'fecha' => $fecha, 'autor' => $autor);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return false;
-        } finally {
-            $con->cerrarConexion();
-        }
+        $query = "call db_liceo_web.sp_obtenerNoticiaId(? );";
+        $binParam = new BindParam();
+        $binParam->add('i', $id);
+
+        
+        $noticia =query_database::find($query, $binParam)[0];
+
+     
+        return $noticia ;
+  
     }
 
     static public function getNoticiasPaginado($pagina, $noticias_pagina)
@@ -71,33 +58,11 @@ class noticia_controller
 
     static public function getNoticias()
     {
-        try {
-            $noticias = array();;
-            $con = new Conexion();
-            $resultado = $con->getConexion()->query("CALL sp_getNoticias();");
-            if ($resultado) {
-                while ($fila = $resultado->fetch_row()) {
-                    array_push(
-                        $noticias,
-                        array(
-                            'idnoticia' => $fila[0],
-                            'titulo' => $fila[1],
-                            'descripcion' => $fila[2],
-                            'fecha' => $fila[3],
-                            'autor' => $fila[4]
 
-                        )
-                    );
-                }
-                $resultado->close();
-            }
-            return $noticias;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return false;
-        } finally {
-            $con->cerrarConexion();
-        }
+        $query = "call db_liceo_web.sp_obtenerNoticias();";
+        $grados = query_database::findAll($query);
+        echo json_encode($grados);
+    
     }
 
     static public function insertNoticia($titulo, $texto, $autor)
@@ -119,27 +84,13 @@ class noticia_controller
 
     static public function deleteNoticia($id)
     {
-        try {
-            $con = new Conexion();
 
-            $stmt = $con->getConexion()->prepare("CALL sp_deleteNoticiaID(?);");
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
-
-            $response = [
-                'status' => 'success',
-                'msg' => 'noticia eliminada exitosamente'
-            ];
-        } catch (PDOException $e) {
-            $response = [
-                'status' => 'error',
-                'errors' => $e->getMessage()
-            ];
-        } finally {
-            $con->cerrarConexion();
-        }
-
-        return $response;
+        
+        $query = "call db_liceo_web.sp_eliminarNoticia(?);";
+        $binParam = new BindParam();
+        $binParam->add('i', $id);
+        echo json_encode(query_database::CUD($query, $binParam));
+      
     }
 
     static public function getNoticiasCantidad()

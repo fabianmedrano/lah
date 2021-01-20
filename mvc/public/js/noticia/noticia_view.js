@@ -27,7 +27,7 @@ function iniciarTabla() {
                 width: "5%",
                 className: "text-center bg-white",
                 data: function (data, type, val) {
-                    return "<button  type='button' data-toggle='tooltip' data-placement='top' title='Modificar noticia' class='btn btn-outline-success'   onclick='goEditNoticia(" + data.idnoticia + ")'><i class=\"fas fa-edit\"></i></button>";
+                    return "<button  type='button' data-toggle='tooltip' data-placement='top' title='Modificar noticia' class='btn btn-outline-success'   onclick='goEditNoticia(" + data.id_noticia + ")'><i class=\"fas fa-edit\"></i></button>";
                 }
             },
             {
@@ -37,7 +37,7 @@ function iniciarTabla() {
                 width: "5%",
                 className: "text-center bg-white",
                 data: function (data, type, val) {
-                    return "<button id='"+data.idnoticia+"' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar noticia' onclick='deleteNoticia(" + data.idnoticia + ")' class='btn btn-outline-danger'><i class='far fa-trash-alt' ></i></button>";
+                    return "<button id='"+data.idnoticia+"' type='button' data-toggle='tooltip' data-placement='top' title='Eliminar noticia' onclick='deleteNoticia(" + data.id_noticia + ")' class='btn btn-outline-danger'><i class='far fa-trash-alt' ></i></button>";
                 }
             }
         ],
@@ -48,10 +48,10 @@ function iniciarTabla() {
 function getNoticias() {
     respuesta = [];
     $.ajax({
-        url: "../../Controller/noticia/switch_controller.php",
+        url: "../../controller/noticia/noticia_switch.php",
         type: "POST",
         dataType: "json",
-        data: { "btn_accion": "Obtener" },
+        data: { "accion": "obtener_noticias" },
         async: false,
         success: function (data) {
             respuesta = data;
@@ -67,7 +67,7 @@ function getNoticias() {
 
 
 function goEditNoticia(id) {
-    location.href = "http://localhost/asirea/asireaMVC/View/Noticia/noticia_edit_admin.php?noticia=" + id
+    location.href = "noticia_edit_admin.php?noticia=" + id
 }
 
 function deleteNoticia(id) {
@@ -85,26 +85,23 @@ function deleteNoticia(id) {
         if (result.value) {
             $.ajax({
                 method: "POST",
-                url: "../../Controller/noticia/switch_controller.php",
-                data: { "btn_accion": "Eliminar", "id_noticia": id },
+                url: "../../controller/noticia/noticia_switch.php",
+                data: { "accion": "delete", "id_noticia": id },
                 async: false,
                 dataType: "json",
-                success: function () {
-                    Swal.fire(
-                        'Eliminada!',
-                        'Noticia ha sido eliminada',
-                        'success'
-                    )
-                    $('#'+id).parent().parent().remove();
-
-                },
-                error: function () {
-                    Swal.fire(
-                        'Ha ocurrido un error',
-                        'intente refrescar la pagina',
-                        'error'
-                    )
-
+                success: function (res) {
+                    console.log(res);
+                    alertas(res);
+                    
+                     $('#noticias_list').DataTable().clear().rows.add(getNoticias()).draw();
+                 
+                },          
+                error: function (res) {
+                    console.log(res);
+                    var result = limpiarJson(res);
+                    alertas(result);
+                    
+                
                 }
             });
         }

@@ -83,35 +83,30 @@ var $ruleau = [
                 closeOnCancel: false
             }).then((result) => {
                 if (result.value) {
+                    $data = $('#form-noticia-edit').serializeArray();
+                    
+                    $data.push({ name: 'id_noticia', value: $("#form-noticia-edit").attr("name") });
+                    $data.push({ name: 'accion', value: 'update' });
 
-                        var $form = $("#form-noticia-edit");
-                        var $accion = "&btn_accion=Actualizar";
-                        var $id = "&id_noticia=" + $form.attr("name")
 
-                        $.ajax({
-                            method: $form.attr("method"),
-                            url: $form.attr("action"),
-                            data: $form.serialize() + $accion + $id,
-                            async: false,
-                            dataType: "json",
-                            success: function () {
+                    $.ajax({
+                        url: '../../controller/noticia/noticia_switch.php',
+                        type: 'POST',
+                        data: $.param($data),
+                        async: false,
+                        dataType: "json",
+                        success: function (res) {
 
-                                     
-                                Swal.fire(
-                                    'Actualizada!',
-                                    'Noticia actualizada con exito',
-                                    'success'
-                                )
-                            
-                            },
-                            error: function () {
-                                Swal.fire(
-                                    "Ha ocurrido un error",
-                                    "intente refrescar la pagina", 
-                                    "error"
-                                    );
-                            }
-                        });
+                            console.log(res);
+                            var result = limpiarJson(res);
+                            alertas(res);
+                        },
+                        error: function (res) {
+                            console.log(res);
+                            var result = limpiarJson(res);
+                            alertas(res);
+                        }
+                    });
                     } else {
                         Swal.fire(
                             'Cancelado',

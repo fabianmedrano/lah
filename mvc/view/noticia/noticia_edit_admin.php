@@ -1,7 +1,5 @@
 <?php
-include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
-
-require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
+require_once  "../../controller/noticia/noticia_controller.php";
 
 ?>
 
@@ -11,40 +9,54 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
 <head>
 
-<?php include(TEMPLATES_PATH . "/metadata.php") ?>
 
-<link href="<?php echo PUBLIC_PATH ?>/css/noticias/noticias.css" rel="stylesheet">
+<?php require_once "../base/metadata.php"?>
+
+<link rel="stylesheet" href="../../public/css/dashboard.css">
+
+<link href="../../public/css/noticias/noticias.css" rel="stylesheet">
   <link href="<?php echo PUBLIC_PATH ?>/css/general.css" rel="stylesheet">
 
   
 
-  <script src="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.css">
+  
+  <script src="../../public/js/noticia/noticia_edit.js"></script>
 
-  
-  <script src="<?php echo PUBLIC_PATH ?>/js/noticia/noticia_edit.js"></script>
-  
-  <script src="<?php echo LIB_PATH ?>/ckeditor/ckeditor.js"></script>
-  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/textmatch/plugin.js"></script>
-  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/autolink/plugin.js"></script>
-  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/autoembed/plugin.js"></script>
-  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/image2/plugin.js"></script>
-  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/embedbase/plugin.js"></script>
-  <script src="<?php echo LIB_PATH ?>/ckeditor/plugins/embed/plugin.js"></script>
+  <script src="../../lib/ckeditor/ckeditor.js"></script>
 
-  
-  <script src="<?php  echo PUBLIC_PATH ?>/js/validacion.js"></script>
+
+
+<script src="../../public/js/validacion.js"></script>
+<!-- FIN jquery validation-->
+
+<script src="../../public/js/noticia/noticia_create.js"></script>
+<script src="../../lib/ckeditor/plugins/textmatch/plugin.js"></script>
+<script src="../../lib/ckeditor/plugins/autolink/plugin.js"></script>
+<script src="../../lib/ckeditor/plugins/autoembed/plugin.js"></script>
+<script src="../../lib/ckeditor/plugins/image2/plugin.js"></script>
+<script src="../../lib/ckeditor/plugins/embedbase/plugin.js"></script>
+<script src="../../lib/ckeditor/plugins/embed/plugin.js"></script>
   <title>Edición noticia</title>
 
 </head>
 
 <body>
-  <?php include(TEMPLATES_PATH . "/header.php") ?>
+
+<?php require_once "../base/navbarAdmin.php" ?>
+
+
+
+<!--   INICIO CKEDITOR   -->
+<div class="container-fluid">
+  <div class="row">
+    <?php require_once "../base/menuVertical.php" ?>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
   <div class="container">
     <?php
 
-    $controlador_noticia = new NoticiaController();
+    $controlador_noticia = new noticia_controller();
     $noticia = $controlador_noticia->getNoticiaID($_GET["noticia"]);
 
     ?>
@@ -54,7 +66,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
     <div class="container-flex">
       <section class="wrapper news-posts ">
         <div class="row">
-              <form id="form-noticia-edit" name="<?php echo $noticia['id'] ?>" method="post" action="../../Controller/noticia/switch_controller.php">
+              <form id="form-noticia-edit" name="<?php echo $noticia['id_noticia'] ?>" method="post" action="../../Controller/noticia/switch_controller.php">
                
               <fieldset>
 
@@ -81,7 +93,7 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
                     <textarea name="editor_noticia" id="editor_noticia" rows="10" cols="80">
                     <?php
 
-                    echo ($noticia['descripcion']);
+                    echo ($noticia['texto']);
 
                     ?>
                     </textarea>
@@ -92,11 +104,12 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
     
                   <script>
 
-CKEDITOR.replace('editor_noticia', {
-                filebrowserBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo($noticia['id']) ?>/',
-                filebrowserUploadUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo($noticia['id']) ?>/',
-           filebrowserImageBrowseUrl: '/asirea/asireaMVC/lib/filemanager/filemanager/dialog.php?type=1&editor=ckeditor&fldr=noticias/noticias/<?php echo($noticia['id']) ?>/'
-              });
+
+              CKEDITOR.replace('editor_noticia', {
+                        filebrowserBrowseUrl: '/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo($noticia['id_noticia']) ?>/',
+                        filebrowserUploadUrl: '/lib/filemanager/filemanager/dialog.php?type=2&editor=ckeditor&fldr=noticias/noticias/<?php echo($noticia['id_noticia'])?>/',
+                        filebrowserImageBrowseUrl: '/lib/filemanager/filemanager/dialog.php?type=1&editor=ckeditor&fldr=noticias/noticias/<?php echo($noticia['id_noticia']) ?>/'
+                      });
 
                   </script>
                 </fieldset>
@@ -105,7 +118,10 @@ CKEDITOR.replace('editor_noticia', {
         <!--   FIN CKEDITOR   -->
       </section>
     </div>
-
+  </div>
+    </main>
+  </div>
+</div>
 </body>
 
 </html>

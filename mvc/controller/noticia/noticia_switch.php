@@ -11,7 +11,7 @@ if (isset($_REQUEST['accion'])) {
 
     switch($_REQUEST['accion']) {
 
-        case 'Actualizar':
+        case 'update':
             $controlador_noticia->uptateNoticia($_POST["id_noticia"], $_POST["titulo_noticia"], $_POST["editor_noticia"] ,$_POST["autor_noticia"] );
             break;
 
@@ -20,15 +20,15 @@ if (isset($_REQUEST['accion'])) {
 
             break;
 
-        case 'Eliminar':
+        case 'delete':
 
             $controlador_noticia->deleteNoticia($_POST["id_noticia"]);
 
         break;
 
-        case 'Obtener':
+        case 'obtener_noticias':
             
-            echo( json_encode( $controlador_noticia->getNoticias()));;
+         $controlador_noticia->getNoticias();
             break;
 
 

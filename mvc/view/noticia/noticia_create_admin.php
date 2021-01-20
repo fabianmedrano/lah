@@ -11,9 +11,8 @@ $numnews = $controlador_noticia->createFile();
 <html lang="es">
 
 <head>
+
 <?php require_once "../base/metadata.php"?>
-
-
 
 <link rel="stylesheet" href="../../public/css/dashboard.css">
 <link rel="stylesheet" href="../../public/css/estudiante/estudiante.css">

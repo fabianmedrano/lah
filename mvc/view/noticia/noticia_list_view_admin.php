@@ -1,8 +1,7 @@
 <?php
-include($_SERVER['DOCUMENT_ROOT'] . "/asirea/asireaMVC/config.php");
 
 
-require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
+require_once "../../controller/noticia/noticia_controller.php";
 
 ?>
 
@@ -12,21 +11,26 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 
 <head>
 
-    <?php include(TEMPLATES_PATH . "/metadata.php") ?>
-    <link href="<?php echo PUBLIC_PATH ?>/css/general.css" rel="stylesheet">
-    <link href="<?php echo PUBLIC_PATH ?>/css/noticias/noticias.css" rel="stylesheet">
+    <?php require_once "../base/metadata.php" ?>
 
 
 
-    <link rel="stylesheet" type="text/css" href="<?php echo LIB_PATH ?>/DataTables/datatables.css">
+    <link rel="stylesheet" href="../../public/css/dashboard.css">
 
-    <link rel="stylesheet" type="text/css" href="<?php echo LIB_PATH ?>/DataTables/DataTables-1.10.21/css/dataTables.bootstrap4.css">
-    <script type="text/javascript" charset="utf8" src="<?php echo LIB_PATH ?>/DataTables/datatables.js"></script>
+    <link href="./css/general.css" rel="stylesheet">
+    <link href="../../public/css/noticias/noticias.css" rel="stylesheet">
 
-    <script src="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="<?php echo LIB_PATH ?>/sweetalert2/dist/sweetalert2.min.css">
 
-    <script type="text/javascript" charset="utf8" src="<?php echo PUBLIC_PATH ?>/js/noticia/noticia_view.js"></script>
+    <link rel="stylesheet" href="../../public/css/dashboard.css">
+
+
+    <link rel="stylesheet" href="../../lib/DataTables/DataTables-1.10.21/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="../../lib/fontawesome/css/all.min.css">
+
+    <script src="../../lib/DataTables/DataTables-1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="../../public/js/estudiante/estudiante_view_admin.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="../../public/js/noticia/noticia_view.js"></script>
 
     <!--   JS Files END  -->
 
@@ -37,18 +41,30 @@ require_once CONTROLLER_PATH . "/noticia/noticia_controller.php";
 </head>
 
 <body>
-    <?php include(TEMPLATES_PATH . "/nav.php") ?>
-    <div class="container">
-        <div class="row mb-3">
 
-            <a class="btn btn-success " href="../Noticia/noticia_create_admin.php"><i class="far fa-plus-square"></i> Noticia</a>
+    <?php require_once "../base/navbarAdmin.php" ?>
+
+    <div class="container-fluid">
+        <div class="row">
+            <?php require_once "../base/menuVertical.php" ?>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+
+                <div class="container">
+                    <div class="row mb-3">
+
+                        <a class="btn btn-success " href="noticia_create_admin.php"><i class="far fa-plus-square"></i> Noticia</a>
+                    </div>
+
+                    <table id="noticias_list" class="table table-striped table-bordered dt-responsive display">
+                        <thead></thead>
+                        <tbody></tbody>
+                    </table>
+
+                </div>
+            </main>
         </div>
-
-        <table id="noticias_list" class="table table-striped table-bordered dt-responsive display">
-            <thead></thead>
-            <tbody></tbody>
-        </table>
-
     </div>
 </body>
 
